@@ -1,6 +1,6 @@
 
-Linux tips & tricks
+## Linux tips & tricks
 
-## Artigos
+Artigos
 
-- [Debotstartp - Guia Basico](http://elabz.net/Linux/bootstrap.md)
+- [Debotstartp - Guia Basico](http://elabz.net/Linux/debootstrap.md)
