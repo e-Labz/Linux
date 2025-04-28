@@ -2,6 +2,29 @@
 
 O virsh é uma ferramenta de linha de comando para gerenciar máquinas virtuais em ambientes KVM/QEMU.
 
+## Conectar ao Hypervisor Local e Remoto
+
+```bash
+# Conectar ao hypervisor local (padrão)
+virsh
+
+# Conectar a um hypervisor local específico
+virsh -c qemu:///system    # Como root para VMs do sistema
+virsh -c qemu:///session   # Como usuário normal para VMs do usuário
+
+# Conectar a um hypervisor remoto via SSH
+virsh -c qemu+ssh://usuario@servidor/system
+
+# Conectar a um hypervisor remoto via TLS
+virsh -c qemu+tls://servidor/system
+
+# Conectar a um hypervisor remoto via TCP (não seguro)
+virsh -c qemu+tcp://servidor/system
+
+# Exemplo de conexão com servidor remoto e execução direta de comando
+virsh -c qemu+ssh://usuario@servidor/system list --all
+```
+
 ## Listar Máquinas Virtuais
 
 ```bash
@@ -32,6 +55,33 @@ virsh suspend nome_da_vm
 
 # Retomar uma VM suspensa
 virsh resume nome_da_vm
+```
+
+## Exportar e Importar VMs
+
+```bash
+# Exportar configuração XML da VM
+virsh dumpxml nome_da_vm > vm_configuracao.xml
+
+# Exportar VM completa (configuração + discos)
+virsh dumpxml nome_da_vm > vm_configuracao.xml
+virsh domblklist nome_da_vm  # Listar discos para saber quais exportar
+
+# Copiar imagem de disco (certifique-se de que a VM esteja desligada)
+cp /var/lib/libvirt/images/nome_da_vm.qcow2 /caminho/de/backup/
+
+# Método alternativo usando virt-clone para criar uma cópia completa
+virt-clone --original nome_da_vm --name vm_exportada --file /caminho/para/exportar/disco.qcow2
+
+# Exportar para OVA (requer pacote virt-v2v)
+mkdir /tmp/export
+virt-v2v -i libvirt -o local -os /tmp/export -n nome_da_vm nome_da_vm
+
+# Importar VM a partir do XML
+virsh define vm_configuracao.xml
+
+# Importar VM a partir de uma imagem de disco
+virt-install --name nova_vm --memory 2048 --vcpus 2 --disk /caminho/para/disco_importado.qcow2 --import
 ```
 
 ## Acessar Console da VM
