@@ -3,4 +3,4 @@
 
 Artigos
 
-- [Debotstartp - Guia Basico](http://elabz.net/Linux/debootstrap.md)
+- [Debotstartp - Guia Basico](http://elabz.net/Linux/debootstrap)
