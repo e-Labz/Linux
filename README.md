@@ -1,4 +1,4 @@
-
+![Logo](http://elabz.net/banner.png)
 ### Linux tips & tricks
 
 | File | Description |
