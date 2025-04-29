@@ -1,4 +1,4 @@
-![Logo](http://elabz.net/banner.png)
+[![Banner](http://elabz.net/banner.png)](http://eLabz.net)
 ### Linux tips & tricks
 
 | File | Description |
